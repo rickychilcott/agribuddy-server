@@ -1,5 +1,5 @@
 Agribuddy::Application.routes.draw do
-  resource :market, only: [:index, :show]
+  resources :markets, only: [:index, :show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
