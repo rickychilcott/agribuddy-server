@@ -19,11 +19,23 @@ group :assets do
 end
 
 group :development do
-	gem 'debugger'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  
+  gem 'textmate_backtracer'
+  gem 'ruby_gntp'
+  gem 'debugger'
 end
 
 group :development, :test do
-	gem "rspec-rails", "~> 2.0"
+  gem 'rspec-rails'
+  gem 'spork'
+  
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'pry-remote'
 end
 
 gem 'jquery-rails'
