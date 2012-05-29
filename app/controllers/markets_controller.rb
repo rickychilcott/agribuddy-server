@@ -1,12 +1,10 @@
 class MarketsController < ApplicationController
   def index
     if params[:lat] && params[:long]
-      @markets = Market.geo_near(:lat => params[:lat], :lng => params[:lng])
+      @markets = Market.geo_near({:lng => params[:lng], :lat => params[:lat]}, num: 10)
     end
     
-    @markets ||= Market.all
-    
-    @markets = @markets.limit(10)
+    @markets ||= Market.all.limit(10)
   end
 
   def show
