@@ -26,7 +26,7 @@ namespace :data do
         fruit: "Fruit", herbs: "Herbs", vegetables: "Vegetables", honey: "Honey", jams: "Jams", maple: "Maple", meat: "Meat", 
         nuts: "Nuts", plants: "Plants", prepared: "Prepared", soap: "Soap"}
        
-      CSV.foreach((args[:location] + FM_DATA_CSV), {headers: headers, encoding: "ISO8859-1"}) do |row|
+      CSV.foreach((args[:location] + FM_DATA_CSV), {headers: headers}) do |row|
         if row["FMID"]
           market = Market.find_or_initialize_by(:fmid => row["FMID"])
           
