@@ -1,6 +1,7 @@
 class Market
   include Mongoid::Document
-
+  include Mongoid::Spacial::Document
+  
   field :fmid, type: Integer
   field :name
   field :website
@@ -11,9 +12,8 @@ class Market
   field :state
   field :zip
   
-  field :x
-  field :y
-  field :location
+  field :location, type: Array, spacial: true
+  field :description
   
   field :credit_card, type: Boolean # Credit cards accepted
   field :wic, type: Boolean         # WIC Farmers Market Nutrition Program (WIC-FMNP)
@@ -41,4 +41,6 @@ class Market
   validates_uniqueness_of :fmid
   validates_presence_of :fmid
   validates_presence_of :name
+  
+  spacial_index :location
 end

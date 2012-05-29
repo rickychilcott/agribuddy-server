@@ -4,6 +4,7 @@ gem 'rails', '3.2.3'
 
 gem 'bson_ext'
 gem 'mongoid'
+gem 'mongoid_spacial'
 gem 'rabl'
 
 # Gems used only for assets and not required

@@ -17,11 +17,11 @@ namespace :data do
 
     desc "Import data"
     task :import => :environment do |t, args|
-      args.with_defaults  location: "#{Rails.root}/tmp/"
+      args.with_defaults  location: "#{Rails.root}/public/"
       headers = "FMID,MarketName,Website,Street,City,County,State,Zip,x,y,Location,Credit,WIC,WICcash,SFMNP,SNAP,Bakedgoods,Cheese,Crafts,Flowers,Seafood,Fruit,Herbs,Vegetables,Honey,Jams,Maple,Meat,Nuts,Plants,Prepared,Soap"
       
       attribute_key_mappings = {name: "MarketName", website: "Website", street: "Street", city: "City", county: "County", 
-        state: "State", zip: "Zip", location: "Location", credit_card: "Credit", wic: "WIC", wic_cash: "WICcash", sfmnp: "SFMNP", 
+        state: "State", zip: "Zip", description: "Location", credit_card: "Credit", wic: "WIC", wic_cash: "WICcash", sfmnp: "SFMNP", 
         snap: "SNAP", baked_goods: "Bakedgoods", cheese: "Cheese", crafts: "Crafts", flowers: "Flowers", seafood: "Seafood", 
         fruit: "Fruit", herbs: "Herbs", vegetables: "Vegetables", honey: "Honey", jams: "Jams", maple: "Maple", meat: "Meat", 
         nuts: "Nuts", plants: "Plants", prepared: "Prepared", soap: "Soap"}
@@ -29,10 +29,15 @@ namespace :data do
       CSV.foreach((args[:location] + FM_DATA_CSV), {headers: headers, encoding: "ISO8859-1"}) do |row|
         if row["FMID"]
           market = Market.find_or_initialize_by(:fmid => row["FMID"])
-          market.x = row["x"]
-          market.y = row["y"]
           
-          attribute_key_mappings.each do |market_key, row_key|  
+          # Spacial aware long/lat
+          market.location = {:long => row["x"], :lat => row["y"]}
+          
+          attribute_key_mappings.each do |market_key, row_key|
+            # Data clean up for Y/N
+            row[row_key] = true if row[row_key] == "Y"
+            row[row_key] = false if row[row_key] == "N"
+            
             market[market_key] = row[row_key]
           end
           

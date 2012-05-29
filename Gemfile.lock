@@ -88,6 +88,9 @@ GEM
       activemodel (~> 3.1)
       mongo (~> 1.3)
       tzinfo (~> 0.3.22)
+    mongoid_spacial (0.2.16)
+      activesupport (~> 3.0)
+      mongoid (>= 2.3.0)
     multi_json (1.3.5)
     polyglot (0.3.3)
     pry (0.9.9.6)
@@ -176,6 +179,7 @@ DEPENDENCIES
   guard-spork
   jquery-rails
   mongoid
+  mongoid_spacial
   pry-remote
   rabl
   rails (= 3.2.3)
