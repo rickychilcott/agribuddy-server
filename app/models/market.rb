@@ -2,7 +2,7 @@ class Market
   include Mongoid::Document
 
   field :fmid, type: Integer
-  field :market_name
+  field :name
   field :website
   
   field :street
@@ -40,5 +40,5 @@ class Market
   
   validates_uniqueness_of :fmid
   validates_presence_of :fmid
-  validates_presence_of :market_name
+  validates_presence_of :name
 end

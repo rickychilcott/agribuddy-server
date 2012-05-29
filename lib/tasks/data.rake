@@ -20,7 +20,7 @@ namespace :data do
       args.with_defaults  location: "#{Rails.root}/tmp/"
       headers = "FMID,MarketName,Website,Street,City,County,State,Zip,x,y,Location,Credit,WIC,WICcash,SFMNP,SNAP,Bakedgoods,Cheese,Crafts,Flowers,Seafood,Fruit,Herbs,Vegetables,Honey,Jams,Maple,Meat,Nuts,Plants,Prepared,Soap"
       
-      attribute_key_mappings = {market_name: "MarketName", website: "Website", street: "Street", city: "City", county: "County", 
+      attribute_key_mappings = {name: "MarketName", website: "Website", street: "Street", city: "City", county: "County", 
         state: "State", zip: "Zip", location: "Location", credit_card: "Credit", wic: "WIC", wic_cash: "WICcash", sfmnp: "SFMNP", 
         snap: "SNAP", baked_goods: "Bakedgoods", cheese: "Cheese", crafts: "Crafts", flowers: "Flowers", seafood: "Seafood", 
         fruit: "Fruit", herbs: "Herbs", vegetables: "Vegetables", honey: "Honey", jams: "Jams", maple: "Maple", meat: "Meat", 
@@ -35,6 +35,8 @@ namespace :data do
           attribute_key_mappings.each do |market_key, row_key|  
             market[market_key] = row[row_key]
           end
+          
+          market.save
         end
       end
     end    
