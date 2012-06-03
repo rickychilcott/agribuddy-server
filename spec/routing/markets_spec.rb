@@ -21,6 +21,10 @@ describe "routing to markets" do
   end
 
   it "does not expose a delete method" do
+    { put: "/markets/1", method: "delete" }.should_not be_routable
+  end
+  
+  it "does not expose an update method" do
     { put: "/markets/1" }.should_not be_routable
   end
 end
